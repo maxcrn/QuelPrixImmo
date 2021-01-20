@@ -1,63 +1,109 @@
 package fr.univpau.quelpriximmo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+
+import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.location.Criteria;
+import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
+
+import fr.univpau.quelpriximmo.AsyncTask.JsonGetter;
+
 public class SearchForm extends AppCompatActivity {
+
+
+    private Double latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_form);
+
+        getLocation();
     }
 
-    public void okSearch(View v){
+    public void okSearch(View v) throws IOException {
 
         RadioButton radioAppt = findViewById(R.id.radioAppt);
         RadioButton radioHome = findViewById(R.id.radioHome);
         EditText nbSearchAns = findViewById(R.id.nbSearchAns);
 
         String search = "https://api.cquest.org/dvf?";
+        String distance = "2000";
+        search += "lat=" + latitude + "&lon=" + longitude + "&dist=" + distance;
+        System.out.println(search); // Print de l'URL
 
-        getLocation();
 
+
+        String typeBien = "";
+        if(radioAppt.isChecked()){
+            typeBien = "Appartement";
+        }
+        else if(radioHome.isChecked()){
+            typeBien = "Maison";
+        }
+
+        String nbPieces = nbSearchAns.getText().toString();
+
+        JsonGetter jsonGetter = new JsonGetter(this, typeBien, nbPieces);
+        jsonGetter.execute(search);
+
+        System.out.println("Bien recherché : " + typeBien + " avec " + nbPieces + " pièces");
     }
 
-    private Location getLocation(){
+    @SuppressLint("MissingPermission")
+    private void getLocation() {
 
-        LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+        LocationRequest mLocationRequest = LocationRequest.create();
+        mLocationRequest.setInterval(60000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setNumUpdates(2);
+        LocationCallback mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    if (location != null) {
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                    }
+                }
+            }
+        };
+        LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, mLocationCallback, null);
 
-        // Définition des critères de recherche de localisation
-        Criteria criterias = new Criteria();
-        criterias.setAccuracy(Criteria.ACCURACY_FINE); // Precision
-        criterias.setAltitudeRequired(false); // Altitude
-        criterias.setBearingRequired(false); // Direction
-        criterias.setSpeedRequired(false); // Vitesse
-        criterias.setCostAllowed(true); // Coûts
-        criterias.setPowerRequirement(Criteria.POWER_HIGH); // Energie
-
-        String provider = locationManager.getBestProvider(criterias, true);
-        Log.d("GPS", "Fournisseur : " + provider);
-
-        @SuppressLint("MissingPermission")
-        Location location = locationManager.getLastKnownLocation(provider);
-        System.out.println(location);
-        Log.d("GPS", "Localisation : " + location.toString());
-        String coord = String.format("Latitude : %f - Longitude : %f\n", location.getLatitude(), location.getLongitude());
-        Log.d("GPS", "Coordonnees : " + coord);
-
-        return location;
+        LocationServices.getFusedLocationProviderClient(this).getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+        });
 
     }
-
 }

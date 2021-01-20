@@ -59,9 +59,7 @@ public class PropertyAdapter extends ArrayAdapter<Property> {
             // Date
         String strDate = "";
         if(property.getDateMutation() != null){
-            Date date = property.getDateMutation();
-            DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-            strDate = dateFormat.format(date);
+            String date = property.getDateMutation();
         }
 
 

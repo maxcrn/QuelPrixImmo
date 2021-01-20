@@ -1,11 +1,13 @@
 package fr.univpau.quelpriximmo;
 
-import java.util.Date;
+import android.os.Parcelable;
 
-public class Property {
+import java.io.Serializable;
+
+public class Property implements Serializable {
 
     // Vente
-    Date dateMutation;
+    String dateMutation;
     String natureMutation;
     String valeurFonciere;
 
@@ -34,7 +36,10 @@ public class Property {
     //Constructor
 
 
-    public Property(Date dateMutation, String natureMutation, String valeurFonciere, String numVoie, String sufNum, String typeVoie, String voie, String codePostal, String commune, String surfLot1, String surfLot2, String surfLot3, String surfLot4, String surfLot5, String typeLocal, String surfReelleBatie, String nbPieces, String surfTerrain, String parcelleCada) {
+    public Property() {
+    }
+
+    public Property(String dateMutation, String natureMutation, String valeurFonciere, String numVoie, String sufNum, String typeVoie, String voie, String codePostal, String commune, String surfLot1, String surfLot2, String surfLot3, String surfLot4, String surfLot5, String typeLocal, String surfReelleBatie, String nbPieces, String surfTerrain, String parcelleCada) {
         this.dateMutation = dateMutation;
         this.natureMutation = natureMutation;
         this.valeurFonciere = valeurFonciere;
@@ -59,11 +64,11 @@ public class Property {
     // Getters and Setters
 
 
-    public Date getDateMutation() {
+    public String getDateMutation() {
         return dateMutation;
     }
 
-    public void setDateMutation(Date dateMutation) {
+    public void setDateMutation(String dateMutation) {
         this.dateMutation = dateMutation;
     }
 
