@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">QuelPrixImmo</string>
+
+    --Global
+    <string name="search">Rechercher</string>
+
+    --Search
+    <string name="home">Maison</string>
+    <string name="appt">Appartement</string>
+    <string name="titleSearch">Recherche de bien</string>
+    <string name="typeSearch">Type de bien</string>
+    <string name="nbSearch">Nombre de pièces</string>
+    <string name="nbSearchHint">Exemple : 4</string>
+
+</resources>

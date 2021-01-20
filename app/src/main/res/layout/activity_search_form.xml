@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchForm">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      tools:layout_editor_absoluteX="151dp"
+      tools:layout_editor_absoluteY="169dp">
+
+    <TextView
+        android:id="@+id/titleSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/titleSearch"
+        android:textAlignment="center"
+        android:textAppearance="@style/titleSearch" />
+
+    <TextView
+        android:id="@+id/typeSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/typeSearch"
+        android:textAppearance="@style/title2Search" />
+
+    <RadioGroup
+        android:id="@+id/grpRadio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <RadioButton
+          android:id="@+id/radioAppt"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/appt"
+          android:textAppearance="@style/radioText"
+          app:buttonTint="@color/yellowQPI" />
+
+      <RadioButton
+          android:id="@+id/radioHome"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/home"
+          android:textAppearance="@style/radioText"
+          app:buttonTint="@color/yellowQPI" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/nbSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/nbSearch"
+        android:textAppearance="@style/title2Search" />
+
+    <EditText
+        android:id="@+id/nbSearchAns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/nbSearchHint"
+        android:inputType="number"
+        android:shadowColor="@color/yellowQPI"
+        android:textColorHighlight="@color/yellowQPI"
+        android:textColorLink="@color/yellowQPI" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+      <Button
+          android:id="@+id/okSearch"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:onClick="okSearch"
+          android:text="@string/search"
+          android:textSize="18sp"
+          app:backgroundTint="@color/purpleQPI" />
+    </LinearLayout>
+
+  </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
