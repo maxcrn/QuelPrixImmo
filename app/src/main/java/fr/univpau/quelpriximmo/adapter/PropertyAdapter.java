@@ -36,8 +36,7 @@ public class PropertyAdapter extends ArrayAdapter<Property> {
         TextView adresseVente = (TextView) convertView.findViewById(R.id.adresseVente);
         TextView surfaceVente1 = (TextView) convertView.findViewById(R.id.surfaceVente1);
         TextView batPieceVente1 = (TextView) convertView.findViewById(R.id.batPieceVente1);
-        TextView surfaceVente2 = (TextView) convertView.findViewById(R.id.surfaceVente2);
-        TextView batPieceVente2 = (TextView) convertView.findViewById(R.id.batPieceVente2);
+
 
         // Formatage des différents attributs
 
@@ -59,7 +58,7 @@ public class PropertyAdapter extends ArrayAdapter<Property> {
             // Date
         String strDate = "";
         if(property.getDateMutation() != null){
-            String date = property.getDateMutation();
+            strDate = property.getDateMutation();
         }
 
 
@@ -84,16 +83,40 @@ public class PropertyAdapter extends ArrayAdapter<Property> {
             strAdr += property.getCommune() + " ";
         }
 
+            // Surface
+        String strSurf = "";
+        if(property.getSurfReelleBatie() != null){
+            strSurf = property.getSurfReelleBatie() + " m²";
+        }
+
+            //  Type de batiment et nombre de pièces
+        String strBatNbPieces = "";
+        if(property.getTypeLocal() != null){
+            strBatNbPieces = property.getTypeLocal();
+            if(property.getNbPieces() != null){
+                strBatNbPieces += " / " + property.getNbPieces() + " pièces";
+            }
+        }
+        else if(property.getNbPieces() != null){
+            strBatNbPieces += property.getNbPieces() + " pièces";
+        }
+
+
 
         if(!strPrixTypeVente.equals("")){
             prixTypeVente.setText(strPrixTypeVente);
         }
-        prixTypeVente.setText(property.getValeurFonciere() + " € / " + property.getNatureMutation());
         if(!strDate.equals("")){
             dateVente.setText(strDate);
         }
         if(!strAdr.equals("")){
             adresseVente.setText(strAdr);
+        }
+        if(!strSurf.equals("")){
+            surfaceVente1.setText(strSurf);
+        }
+        if(!strBatNbPieces.equals("")){
+            batPieceVente1.setText(strBatNbPieces);
         }
 
 
