@@ -96,6 +96,7 @@
           android:id="@+id/okSearch"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:onClick="okSearch"
           android:text="@string/search"
           android:textSize="18sp"
           app:backgroundTint="@color/purpleQPI" />
