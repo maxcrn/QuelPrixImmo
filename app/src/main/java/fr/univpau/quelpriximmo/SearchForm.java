@@ -1,33 +1,28 @@
 package fr.univpau.quelpriximmo;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.pm.PackageManager;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import fr.univpau.quelpriximmo.AsyncTask.JsonGetter;
 
@@ -35,6 +30,7 @@ public class SearchForm extends AppCompatActivity {
 
 
     private Double latitude, longitude;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +38,34 @@ public class SearchForm extends AppCompatActivity {
         setContentView(R.layout.activity_search_form);
 
         getLocation();
+
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if(pref.getString("distance","unknown").equals("unknown")){
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("distance", "500");
+            editor.apply();
+        }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        if(item.getItemId() == R.id.preference){
+            Intent i = new Intent();
+            i.setClass(this, Pref.class);
+            startActivity(i);
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void okSearch(View v) throws IOException {
@@ -50,8 +74,10 @@ public class SearchForm extends AppCompatActivity {
         RadioButton radioHome = findViewById(R.id.radioHome);
         EditText nbSearchAns = findViewById(R.id.nbSearchAns);
 
+
+
         String search = "https://api.cquest.org/dvf?";
-        String distance = "2000";
+        String distance = pref.getString("distance","unknown");
         search += "lat=" + latitude + "&lon=" + longitude + "&dist=" + distance;
         System.out.println(search); // Print de l'URL
 

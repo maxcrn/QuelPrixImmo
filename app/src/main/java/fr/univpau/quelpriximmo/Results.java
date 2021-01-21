@@ -66,12 +66,12 @@ public class Results extends AppCompatActivity {
 
     private ArrayList getXAxisValues() {
         ArrayList xAxis = new ArrayList();
-        xAxis.add("-100 000€");
-        xAxis.add("100 000€ à 200 000€");
-        xAxis.add("200 000€ à 300 000€");
-        xAxis.add("300 000€ à 400 000€");
-        xAxis.add("400 000€ à 500 000€");
-        xAxis.add("+500 000€");
+        xAxis.add("-100000€");
+        xAxis.add("100000€ à 200000€");
+        xAxis.add("200000€ à 300000€");
+        xAxis.add("300000€ à 400000€");
+        xAxis.add("400000€ à 500000€");
+        xAxis.add("+500000€");
         return xAxis;
     }
 

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.univpau.quelpriximmo">
-
-    <!--Permission d'accès à la localisation via le GPS (1) et le Wi-Fi / antennes relais (2)-->
+    <!-- Permission d'accès à la localisation via le GPS (1) et le Wi-Fi / antennes relais (2) -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuelPrixImmo">
-        <activity android:name=".Results"></activity>
+        <activity android:name=".Pref"></activity>
+        <activity android:name=".Results" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -25,9 +25,6 @@
         <item name="android:typeface">normal</item>
         <item name="android:fontFamily">sans-serif</item>
     </style>
-    <style>
-
-    </style>
 
 
 </resources>

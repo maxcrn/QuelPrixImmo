@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pref">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="98dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/titleSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pref"
+            android:textAlignment="center" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderDist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:valueFrom="200"
+            android:valueTo="2000"
+            app:haloColor="@color/purpleQPI"
+            app:thumbColor="@color/purple2QPI"
+            app:tickColorActive="@color/purpleQPI"
+            app:tickColorInactive="@color/purple2QPI"
+            app:trackColorActive="@color/yellowQPI"
+            app:trackColorInactive="@color/yellowQPI"
+            android:stepSize="1"/>
+
+        <TextView
+            android:id="@+id/distTxt"
+            style="@style/radioText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/validPref"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="validPref"
+                android:text="@string/valid"
+                android:textSize="18sp"
+                app:backgroundTint="@color/purpleQPI" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
