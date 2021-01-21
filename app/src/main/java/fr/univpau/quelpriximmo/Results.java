@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,13 +31,8 @@ public class Results extends AppCompatActivity {
         listProperties = (ListView) findViewById(R.id.listProperties);
         listProperties.setAdapter(propertyAdapter);
 
-
-        for(Property p : resultats){
-            System.out.println(p.getValeurFonciere()+ " / " + p.getNatureMutation());
-            System.out.println(p.getDateMutation());
-            System.out.println(p.getNumVoie() + p.getSufNum() + " " + p.getTypeVoie() + " " + p.getVoie());
-            System.out.println(p.getSurfReelleBatie() + "m²");
-            System.out.println(p.getTypeLocal() + " " + p.getNbPieces() + " pièces");
+        if(resultats.isEmpty()){
+            Toast.makeText(this, "Aucun résultat", Toast.LENGTH_LONG).show();
         }
     }
 
