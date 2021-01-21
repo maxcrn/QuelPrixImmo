@@ -161,8 +161,8 @@ public class Results extends AppCompatActivity {
 //        BarEntry v2e6 = new BarEntry(80.000f, 5); // Jun
 //        valueSet2.add(v2e6);
 
-        BarDataSet barDataSet1 = new BarDataSet(valueSet1, "Valeur Foncière");
-        barDataSet1.setColor(Color.rgb(0, 155, 0));
+        BarDataSet barDataSet1 = new BarDataSet(valueSet1, "Nombre de propriétés vendues dans la tranche de prix");
+        barDataSet1.setColor(Color.rgb(255,156,10));
 //        BarDataSet barDataSet2 = new BarDataSet(valueSet2, "Brand 2");
 //        barDataSet2.setColors(ColorTemplate.COLORFUL_COLORS);
 
