@@ -86,7 +86,7 @@ public class Results extends AppCompatActivity {
             xAxis.add("150000€ à 200000€");
             xAxis.add("200000€ à 300000€");
             xAxis.add("300000€ à 400000€");
-            xAxis.add("+300000€");
+            xAxis.add("+400000");
         }
         if(typeDeTranche == 2){
             xAxis.add("-100000€");
@@ -160,6 +160,14 @@ public class Results extends AppCompatActivity {
             xAxis.add("400000€ à 500000€");
             xAxis.add("+500000€");
         }
+        if(typeDeTranche == 11){
+            xAxis.add("-500000€");
+            xAxis.add("500000€ à 600000€");
+            xAxis.add("600000€ à 700000€");
+            xAxis.add("700000€ à 800000€");
+            xAxis.add("800000€ à 900000€");
+            xAxis.add("+900000€");
+        }
         return xAxis;
     }
 
@@ -173,6 +181,10 @@ public class Results extends AppCompatActivity {
         float fourth = 0;
         float fifth = 0;
         float sixth = 0;
+        float seventh = 0;
+        float eigth = 0;
+        float ninth = 0;
+        float tenth = 0;
 
         for(Property p : resultats){
 
@@ -196,8 +208,24 @@ public class Results extends AppCompatActivity {
                 fifth++;
             }
 
-            else{
+            else if(Float.parseFloat(p.getValeurFonciere()) < 600000){
                 sixth++;
+            }
+
+            else if(Float.parseFloat(p.getValeurFonciere()) < 700000){
+                seventh++;
+            }
+
+            else if(Float.parseFloat(p.getValeurFonciere()) < 800000){
+                eigth++;
+            }
+
+            else if(Float.parseFloat(p.getValeurFonciere()) < 900000){
+                ninth++;
+            }
+
+            else{
+                tenth++;
             }
         }
 
@@ -357,23 +385,23 @@ public class Results extends AppCompatActivity {
             sixth = 0;
             for(Property p : resultats){
 
-                if(Float.parseFloat(p.getValeurFonciere()) < 100000){
+                if(Float.parseFloat(p.getValeurFonciere()) < 200000){
                     first++;
                 }
 
-                else if(Float.parseFloat(p.getValeurFonciere()) < 200000){
+                else if(Float.parseFloat(p.getValeurFonciere()) < 300000){
                     second++;
                 }
 
-                else if(Float.parseFloat(p.getValeurFonciere()) < 300000){
+                else if(Float.parseFloat(p.getValeurFonciere()) < 400000){
                     third++;
                 }
 
-                else if(Float.parseFloat(p.getValeurFonciere()) < 400000){
+                else if(Float.parseFloat(p.getValeurFonciere()) < 450000){
                     fourth++;
                 }
 
-                else if(Float.parseFloat(p.getValeurFonciere()) < 450000){
+                else if(Float.parseFloat(p.getValeurFonciere()) < 500000){
                     fifth++;
                 }
 
@@ -381,6 +409,226 @@ public class Results extends AppCompatActivity {
                     sixth++;
                 }
             }
+        }
+
+        else if(sixth/resultats.size() >= 0.5){
+            tdt = 5;
+            first = 0;
+            second = 0;
+            third = 0;
+            fourth = 0;
+            fifth = 0;
+            sixth = 0;
+            for(Property p : resultats){
+
+                if(Float.parseFloat(p.getValeurFonciere()) < 300000){
+                    first++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 400000){
+                    second++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 500000){
+                    third++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 550000){
+                    fourth++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 600000){
+                    fifth++;
+                }
+
+                else{
+                    sixth++;
+                }
+            }
+        }
+
+        else if(seventh/resultats.size() >= 0.5){
+            tdt = 6;
+            first = 0;
+            second = 0;
+            third = 0;
+            fourth = 0;
+            fifth = 0;
+            sixth = 0;
+            for(Property p : resultats){
+
+                if(Float.parseFloat(p.getValeurFonciere()) < 400000){
+                    first++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 500000){
+                    second++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 600000){
+                    third++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 650000){
+                    fourth++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 700000){
+                    fifth++;
+                }
+
+                else{
+                    sixth++;
+                }
+            }
+        }
+
+        else if(eigth/resultats.size() >= 0.5){
+            tdt = 7;
+            first = 0;
+            second = 0;
+            third = 0;
+            fourth = 0;
+            fifth = 0;
+            sixth = 0;
+            for(Property p : resultats){
+
+                if(Float.parseFloat(p.getValeurFonciere()) < 500000){
+                    first++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 600000){
+                    second++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 700000){
+                    third++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 750000){
+                    fourth++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 800000){
+                    fifth++;
+                }
+
+                else{
+                    sixth++;
+                }
+            }
+        }
+
+        else if(ninth/resultats.size() >= 0.5){
+            tdt = 8;
+            first = 0;
+            second = 0;
+            third = 0;
+            fourth = 0;
+            fifth = 0;
+            sixth = 0;
+            for(Property p : resultats){
+
+                if(Float.parseFloat(p.getValeurFonciere()) < 600000){
+                    first++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 700000){
+                    second++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 800000){
+                    third++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 850000){
+                    fourth++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 900000){
+                    fifth++;
+                }
+
+                else{
+                    sixth++;
+                }
+            }
+        }
+
+        else if(tenth/resultats.size() >= 0.5){
+            tdt = 9;
+            first = 0;
+            second = 0;
+            third = 0;
+            fourth = 0;
+            fifth = 0;
+            sixth = 0;
+            for(Property p : resultats){
+
+                if(Float.parseFloat(p.getValeurFonciere()) < 700000){
+                    first++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 800000){
+                    second++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 900000){
+                    third++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 950000){
+                    fourth++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 1000000){
+                    fifth++;
+                }
+
+                else{
+                    sixth++;
+                }
+            }
+        }
+
+        else if((sixth + seventh + eigth + ninth + tenth) / resultats.size() > 0.5){
+            tdt = 11;
+            first = 0;
+            second = 0;
+            third = 0;
+            fourth = 0;
+            fifth = 0;
+            sixth = 0;
+            for(Property p : resultats){
+
+                if(Float.parseFloat(p.getValeurFonciere()) < 500000){
+                    first++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 600000){
+                    second++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 700000){
+                    third++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 800000){
+                    fourth++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 900000){
+                    fifth++;
+                }
+
+                else{
+                    sixth++;
+                }
+            }
+        }
+
+        else{
+            sixth += seventh + eigth + ninth + tenth;
         }
 
         System.out.println(tdt);

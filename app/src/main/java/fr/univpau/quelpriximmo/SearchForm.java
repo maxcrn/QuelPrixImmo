@@ -78,6 +78,9 @@ public class SearchForm extends AppCompatActivity {
 
         String search = "https://api.cquest.org/dvf?";
         String distance = pref.getString("distance","unknown");
+        // Test pour riches
+        latitude = 44.8421392;
+        longitude = -0.5745577;
         search += "lat=" + latitude + "&lon=" + longitude + "&dist=" + distance;
         System.out.println(search); // Print de l'URL
 
