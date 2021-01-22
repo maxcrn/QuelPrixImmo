@@ -41,7 +41,7 @@ public class JsonGetter extends AsyncTask<String, String, ArrayList<Property>> {
     String result = "";
 
     protected void onPreExecute() {
-        progressDialog.setMessage("Downloading your data...");
+        progressDialog.setMessage("Recherche des biens en cours...");
         progressDialog.show();
         progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             public void onCancel(DialogInterface arg0) {

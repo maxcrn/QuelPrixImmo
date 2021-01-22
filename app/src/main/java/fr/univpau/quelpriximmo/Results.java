@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -25,6 +26,7 @@ public class Results extends AppCompatActivity {
     ArrayList<Property> resultats = new ArrayList<Property>();
     PropertyAdapter propertyAdapter;
     ListView listProperties;
+    int tdt = 10;
 
 
 
@@ -53,25 +55,111 @@ public class Results extends AppCompatActivity {
 
         if(this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             BarChart chart = (BarChart) findViewById(R.id.chart);
-            BarData barData = new BarData();
             chart.setData(getDataSet());
             XAxis xAxis = chart.getXAxis();
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
             xAxis.setDrawGridLines(true);
-            xAxis.setValueFormatter(new IndexAxisValueFormatter(getXAxisValues()));
+            xAxis.setValueFormatter(new IndexAxisValueFormatter(getXAxisValues(tdt)));
             chart.animateXY(2000, 2000);
+            Description desc = new Description();
+            desc.setText("Repartition des ventes par tranches de prix");
+            chart.setDescription(desc);
             chart.invalidate();
         }
     }
 
-    private ArrayList getXAxisValues() {
+    private ArrayList getXAxisValues(int typeDeTranche) {
+
         ArrayList xAxis = new ArrayList();
-        xAxis.add("-100000€");
-        xAxis.add("100000€ à 200000€");
-        xAxis.add("200000€ à 300000€");
-        xAxis.add("300000€ à 400000€");
-        xAxis.add("400000€ à 500000€");
-        xAxis.add("+500000€");
+
+        if(typeDeTranche == 0){
+            xAxis.add("-50000€");
+            xAxis.add("50000€ à 100000€");
+            xAxis.add("100000€ à 200000€");
+            xAxis.add("200000€ à 300000€");
+            xAxis.add("300000€ à 400000€");
+            xAxis.add("+400000€");
+        }
+        if(typeDeTranche == 1){
+            xAxis.add("-100000€");
+            xAxis.add("100000€ à 150000€");
+            xAxis.add("150000€ à 200000€");
+            xAxis.add("200000€ à 300000€");
+            xAxis.add("300000€ à 400000€");
+            xAxis.add("+300000€");
+        }
+        if(typeDeTranche == 2){
+            xAxis.add("-100000€");
+            xAxis.add("100000€ à 200000€");
+            xAxis.add("200000€ à 250000€");
+            xAxis.add("250000€ à 300000€");
+            xAxis.add("300000€ à 400000€");
+            xAxis.add("+400000€");
+        }
+        if(typeDeTranche == 3){
+            xAxis.add("-100000€");
+            xAxis.add("100000€ à 200000€");
+            xAxis.add("200000€ à 300000€");
+            xAxis.add("300000€ à 350000€");
+            xAxis.add("350000€ à 400000€");
+            xAxis.add("+400000€");
+        }
+        if(typeDeTranche == 4){
+            xAxis.add("-200000€");
+            xAxis.add("200000€ à 300000€");
+            xAxis.add("300000€ à 400000€");
+            xAxis.add("400000€ à 450000€");
+            xAxis.add("450000€ à 500000€");
+            xAxis.add("+500000€");
+        }
+        if(typeDeTranche == 5){
+            xAxis.add("-300000€");
+            xAxis.add("300000€ à 400000€");
+            xAxis.add("400000€ à 500000€");
+            xAxis.add("500000€ à 550000€");
+            xAxis.add("550000€ à 600000€");
+            xAxis.add("+600000€");
+        }
+        if(typeDeTranche == 6){
+            xAxis.add("-400000€");
+            xAxis.add("400000€ à 500000€");
+            xAxis.add("500000€ à 600000€");
+            xAxis.add("600000€ à 650000€");
+            xAxis.add("650000€ à 700000€");
+            xAxis.add("+700000€");
+        }
+        if(typeDeTranche == 7){
+            xAxis.add("-500000€");
+            xAxis.add("500000€ à 600000€");
+            xAxis.add("600000€ à 700000€");
+            xAxis.add("700000€ à 750000€");
+            xAxis.add("750000€ à 800000€");
+            xAxis.add("+800000€");
+        }
+        if(typeDeTranche == 8){
+            xAxis.add("-600000€");
+            xAxis.add("600000€ à 700000€");
+            xAxis.add("700000€ à 800000€");
+            xAxis.add("800000€ à 850000€");
+            xAxis.add("850000€ à 900000€");
+            xAxis.add("+900000€");
+        }
+        if(typeDeTranche == 9){
+            xAxis.add("-700000€");
+            xAxis.add("700000€ à 800000€");
+            xAxis.add("800000€ à 900000€");
+            xAxis.add("900000€ à 950000€");
+            xAxis.add("950000€ à 1000000€");
+            xAxis.add("+1000000€");
+        }
+        if(typeDeTranche == 10){
+            xAxis.add("-100000€");
+            xAxis.add("100000€ à 200000€");
+            xAxis.add("200000€ à 300000€");
+            xAxis.add("300000€ à 400000€");
+            xAxis.add("400000€ à 500000€");
+            xAxis.add("+500000€");
+        }
         return xAxis;
     }
 
@@ -79,13 +167,12 @@ public class Results extends AppCompatActivity {
 
 
         ArrayList valueSet1 = new ArrayList();
-        int i = 0;
-        int first = 0;
-        int second = 0;
-        int third = 0;
-        int fourth = 0;
-        int fifth = 0;
-        int sixth = 0;
+        float first = 0;
+        float second = 0;
+        float third = 0;
+        float fourth = 0;
+        float fifth = 0;
+        float sixth = 0;
 
         for(Property p : resultats){
 
@@ -113,6 +200,190 @@ public class Results extends AppCompatActivity {
                 sixth++;
             }
         }
+
+        if(first/resultats.size() >= 0.5){
+            tdt = 0;
+            first = 0;
+            second = 0;
+            third = 0;
+            fourth = 0;
+            fifth = 0;
+            sixth = 0;
+            for(Property p : resultats){
+
+                if(Float.parseFloat(p.getValeurFonciere()) < 50000){
+                    first++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 100000){
+                    second++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 200000){
+                    third++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 300000){
+                    fourth++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 400000){
+                    fifth++;
+                }
+
+                else{
+                    sixth++;
+                }
+            }
+        }
+
+        else if(second/resultats.size() >= 0.5){
+            tdt = 1;
+            first = 0;
+            second = 0;
+            third = 0;
+            fourth = 0;
+            fifth = 0;
+            sixth = 0;
+            for(Property p : resultats){
+
+                if(Float.parseFloat(p.getValeurFonciere()) < 100000){
+                    first++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 150000){
+                    second++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 200000){
+                    third++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 300000){
+                    fourth++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 400000){
+                    fifth++;
+                }
+
+                else{
+                    sixth++;
+                }
+            }
+        }
+
+
+
+        else if(third/resultats.size() >= 0.5){
+            tdt = 2;
+            first = 0;
+            second = 0;
+            third = 0;
+            fourth = 0;
+            fifth = 0;
+            sixth = 0;
+            for(Property p : resultats){
+
+                if(Float.parseFloat(p.getValeurFonciere()) < 100000){
+                    first++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 200000){
+                    second++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 250000){
+                    third++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 300000){
+                    fourth++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 400000){
+                    fifth++;
+                }
+
+                else{
+                    sixth++;
+                }
+            }
+        }
+
+        else if(fourth/resultats.size() >= 0.5){
+            tdt = 3;
+            first = 0;
+            second = 0;
+            third = 0;
+            fourth = 0;
+            fifth = 0;
+            sixth = 0;
+            for(Property p : resultats){
+
+                if(Float.parseFloat(p.getValeurFonciere()) < 100000){
+                    first++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 200000){
+                    second++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 300000){
+                    third++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 350000){
+                    fourth++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 400000){
+                    fifth++;
+                }
+
+                else{
+                    sixth++;
+                }
+            }
+        }
+
+        else if(fifth/resultats.size() >= 0.5){
+            tdt = 4;
+            first = 0;
+            second = 0;
+            third = 0;
+            fourth = 0;
+            fifth = 0;
+            sixth = 0;
+            for(Property p : resultats){
+
+                if(Float.parseFloat(p.getValeurFonciere()) < 100000){
+                    first++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 200000){
+                    second++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 300000){
+                    third++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 400000){
+                    fourth++;
+                }
+
+                else if(Float.parseFloat(p.getValeurFonciere()) < 450000){
+                    fifth++;
+                }
+
+                else{
+                    sixth++;
+                }
+            }
+        }
+
+        System.out.println(tdt);
 
         BarEntry v1e1 = new BarEntry(0, first); // First
         valueSet1.add(v1e1);
