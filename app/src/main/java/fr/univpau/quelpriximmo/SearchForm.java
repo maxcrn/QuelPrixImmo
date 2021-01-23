@@ -5,12 +5,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Surface;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
@@ -46,7 +50,12 @@ public class SearchForm extends AppCompatActivity {
             editor.putString("distance", "500");
             editor.apply();
         }
+    }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     @Override
@@ -69,6 +78,18 @@ public class SearchForm extends AppCompatActivity {
     }
 
     public void okSearch(View v) throws IOException {
+
+        final int rotation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+
+        if(rotation == Surface.ROTATION_0) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        else if(rotation == Surface.ROTATION_90) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+        else if(rotation == Surface.ROTATION_270){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE );
+        }
 
         RadioButton radioAppt = findViewById(R.id.radioAppt);
         RadioButton radioHome = findViewById(R.id.radioHome);
