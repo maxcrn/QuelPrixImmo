@@ -116,6 +116,9 @@ public class JsonGetter extends AsyncTask<String, String, ArrayList<Property>> {
                 if(property.has("nombre_pieces_principales")){
                     newProperty.setNbPieces(property.getString("nombre_pieces_principales"));
                 }
+                if(property.has("surface_terrain")){
+                    newProperty.setSurfTerrain(property.getString("surface_terrain"));
+                }
                 if(newProperty.getNbPieces() != null && newProperty.getTypeLocal() != null){
                     if(newProperty.getNbPieces().equals(asyncTaskNbPieces) && newProperty.getTypeLocal().equals(asyncTaskTypeBien)){
                         propertiesResult.add(newProperty);

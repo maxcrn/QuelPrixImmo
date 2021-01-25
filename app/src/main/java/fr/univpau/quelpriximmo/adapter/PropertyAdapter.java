@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +38,8 @@ public class PropertyAdapter extends ArrayAdapter<Property> {
         TextView adresseVente = (TextView) convertView.findViewById(R.id.adresseVente);
         TextView surfaceVente1 = (TextView) convertView.findViewById(R.id.surfaceVente1);
         TextView batPieceVente1 = (TextView) convertView.findViewById(R.id.batPieceVente1);
+        TextView surfaceTerrain = (TextView) convertView.findViewById(R.id.surfaceTerrain);
+
 
 
         // Formatage des différents attributs
@@ -58,7 +62,12 @@ public class PropertyAdapter extends ArrayAdapter<Property> {
             // Date
         String strDate = "";
         if(property.getDateMutation() != null){
-            strDate = property.getDateMutation();
+            strDate = "Vendu le ";
+            strDate += property.getDateMutation().substring(8);
+            strDate += " - ";
+            strDate += property.getDateMutation().substring(5,7);
+            strDate += " - ";
+            strDate += property.getDateMutation().substring(0,4);
         }
 
 
@@ -101,6 +110,12 @@ public class PropertyAdapter extends ArrayAdapter<Property> {
             strBatNbPieces += property.getNbPieces() + " pièces";
         }
 
+            // Taille du terrain
+        String strTerrain = "";
+        if(property.getSurfTerrain() != null){
+            strTerrain = "Terrain de " + property.getSurfTerrain() + " m²";
+        }
+
 
 
         if(!strPrixTypeVente.equals("")){
@@ -117,6 +132,13 @@ public class PropertyAdapter extends ArrayAdapter<Property> {
         }
         if(!strBatNbPieces.equals("")){
             batPieceVente1.setText(strBatNbPieces);
+        }
+        if(!strTerrain.equals("")){
+            surfaceTerrain.setVisibility(View.VISIBLE);
+            surfaceTerrain.setText(strTerrain);
+        }
+        else{
+            surfaceTerrain.setVisibility(View.GONE);
         }
 
 
