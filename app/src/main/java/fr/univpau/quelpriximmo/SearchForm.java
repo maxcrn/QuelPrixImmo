@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -106,7 +107,6 @@ public class SearchForm extends AppCompatActivity {
         System.out.println(search); // Print de l'URL
 
 
-
         String typeBien = "";
         if(radioAppt.isChecked()){
             typeBien = "Appartement";
@@ -115,10 +115,20 @@ public class SearchForm extends AppCompatActivity {
             typeBien = "Maison";
         }
 
-        String nbPieces = nbSearchAns.getText().toString();
 
-        JsonGetter jsonGetter = new JsonGetter(this, typeBien, nbPieces);
-        jsonGetter.execute(search);
+        String nbPieces = "";
+        nbPieces += nbSearchAns.getText().toString();
+
+        if(typeBien.equals("")){
+            Toast.makeText(this, "Merci de choisir le type de bien", Toast.LENGTH_SHORT).show();
+        }
+        else if(nbPieces.equals("")){
+            Toast.makeText(this, "Merci de choisir le nombre de pièces", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            JsonGetter jsonGetter = new JsonGetter(this, typeBien, nbPieces);
+            jsonGetter.execute(search);
+        }
 
         System.out.println("Bien recherché : " + typeBien + " avec " + nbPieces + " pièces");
     }
