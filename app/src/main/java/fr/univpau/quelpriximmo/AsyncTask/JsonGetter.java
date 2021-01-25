@@ -29,13 +29,15 @@ public class JsonGetter extends AsyncTask<String, String, ArrayList<Property>> {
     private Context asyncTaskContext;
     private ProgressDialog progressDialog;
     private String asyncTaskTypeBien;
-    private String asyncTaskNbPieces;
+    private String asyncTaskNbPiecesMin;
+    private String asyncTaskNbPiecesMax;
 
-    public JsonGetter(Context context, String typeBien, String nbPieces) {
+    public JsonGetter(Context context, String typeBien, String nbPiecesMin, String nbPiecesMax) {
         asyncTaskContext = context;
         progressDialog = new ProgressDialog(asyncTaskContext);
         asyncTaskTypeBien = typeBien;
-        asyncTaskNbPieces = nbPieces;
+        asyncTaskNbPiecesMin = nbPiecesMin;
+        asyncTaskNbPiecesMax = nbPiecesMax;
     }
 
     String result = "";
@@ -120,8 +122,10 @@ public class JsonGetter extends AsyncTask<String, String, ArrayList<Property>> {
                     newProperty.setSurfTerrain(property.getString("surface_terrain"));
                 }
                 if(newProperty.getNbPieces() != null && newProperty.getTypeLocal() != null){
-                    if(newProperty.getNbPieces().equals(asyncTaskNbPieces) && newProperty.getTypeLocal().equals(asyncTaskTypeBien)){
-                        propertiesResult.add(newProperty);
+                    if(newProperty.getTypeLocal().equals(asyncTaskTypeBien)){
+                        if(Integer.parseInt(newProperty.getNbPieces()) >= Integer.parseInt(asyncTaskNbPiecesMin) && Integer.parseInt(newProperty.getNbPieces()) <= Integer.parseInt(asyncTaskNbPiecesMax)){
+                            propertiesResult.add(newProperty);
+                        }
                     }
                 }
 

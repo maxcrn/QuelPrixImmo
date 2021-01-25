@@ -1,12 +1,10 @@
 package fr.univpau.quelpriximmo;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -94,7 +92,8 @@ public class SearchForm extends AppCompatActivity {
 
         RadioButton radioAppt = findViewById(R.id.radioAppt);
         RadioButton radioHome = findViewById(R.id.radioHome);
-        EditText nbSearchAns = findViewById(R.id.nbSearchAns);
+        EditText nbSearchAnsMin = findViewById(R.id.nbSearchMin);
+        EditText nbSearchAnsMax = findViewById(R.id.nbSearchMax);
 
 
 
@@ -116,21 +115,29 @@ public class SearchForm extends AppCompatActivity {
         }
 
 
-        String nbPieces = "";
-        nbPieces += nbSearchAns.getText().toString();
+        String nbPiecesMin = "";
+        nbPiecesMin += nbSearchAnsMin.getText().toString();
+        String nbPiecesMax = "";
+        nbPiecesMax += nbSearchAnsMax.getText().toString();
 
         if(typeBien.equals("")){
             Toast.makeText(this, "Merci de choisir le type de bien", Toast.LENGTH_SHORT).show();
         }
-        else if(nbPieces.equals("")){
-            Toast.makeText(this, "Merci de choisir le nombre de pièces", Toast.LENGTH_SHORT).show();
+        else if(nbPiecesMin.equals("")){
+            Toast.makeText(this, "Merci de choisir le nombre de pièces minimum", Toast.LENGTH_SHORT).show();
+        }
+        else if(nbPiecesMax.equals("")){
+            Toast.makeText(this, "Merci de choisir le nombre de pièces maximum", Toast.LENGTH_SHORT).show();
+        }
+        else if(Integer.parseInt(nbPiecesMin)>Integer.parseInt(nbPiecesMax)){
+            Toast.makeText(this, "Le nombre de pièces minimum doit être inférieur au nombre de pièces maximum", Toast.LENGTH_SHORT).show();
         }
         else{
-            JsonGetter jsonGetter = new JsonGetter(this, typeBien, nbPieces);
+            JsonGetter jsonGetter = new JsonGetter(this, typeBien, nbPiecesMin, nbPiecesMax);
             jsonGetter.execute(search);
         }
 
-        System.out.println("Bien recherché : " + typeBien + " avec " + nbPieces + " pièces");
+        System.out.println("Bien recherché : " + typeBien + " avec " + nbPiecesMin + " pièces à " + nbPiecesMax);
     }
 
     @SuppressLint("MissingPermission")
@@ -164,6 +171,5 @@ public class SearchForm extends AppCompatActivity {
                 longitude = location.getLongitude();
             }
         });
-
     }
 }

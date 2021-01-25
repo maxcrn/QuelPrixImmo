@@ -11,7 +11,10 @@
     <string name="typeSearch">Type de bien</string>
     <string name="nbSearch">Nombre de pièces</string>
     <string name="nbSearchHint">Exemple : 4</string>
+    <string name="nbSearchHintMax">Exemple : 5</string>
     <string name="pref">Préférences</string>
+    <string name="piecesMinStr">Minimum : </string>
+    <string name="piecesMaxStr">Maximum : </string>
 
     --Preferences
     <string name="valid">Valider</string>
