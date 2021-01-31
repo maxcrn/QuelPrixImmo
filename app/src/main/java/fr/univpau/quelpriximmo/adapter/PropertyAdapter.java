@@ -103,11 +103,21 @@ public class PropertyAdapter extends ArrayAdapter<Property> {
         if(property.getTypeLocal() != null){
             strBatNbPieces = property.getTypeLocal();
             if(property.getNbPieces() != null){
-                strBatNbPieces += " / " + property.getNbPieces() + " pièces";
+                if(Integer.parseInt(property.getNbPieces()) > 1){
+                    strBatNbPieces += " / " + property.getNbPieces() + " pièces";
+                }
+                else{
+                    strBatNbPieces += " / " + property.getNbPieces() + " pièce";
+                }
             }
         }
         else if(property.getNbPieces() != null){
-            strBatNbPieces += property.getNbPieces() + " pièces";
+            if(Integer.parseInt(property.getNbPieces()) > 1){
+                strBatNbPieces += " / " + property.getNbPieces() + " pièces";
+            }
+            else{
+                strBatNbPieces += " / " + property.getNbPieces() + " pièce";
+            }
         }
 
             // Taille du terrain

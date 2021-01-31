@@ -24,7 +24,6 @@
         </activity>
         <activity android:name=".SearchForm"
             />
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

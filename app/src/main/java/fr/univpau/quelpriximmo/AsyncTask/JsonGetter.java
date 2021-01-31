@@ -123,8 +123,15 @@ public class JsonGetter extends AsyncTask<String, String, ArrayList<Property>> {
                 }
                 if(newProperty.getNbPieces() != null && newProperty.getTypeLocal() != null){
                     if(newProperty.getTypeLocal().equals(asyncTaskTypeBien)){
-                        if(Integer.parseInt(newProperty.getNbPieces()) >= Integer.parseInt(asyncTaskNbPiecesMin) && Integer.parseInt(newProperty.getNbPieces()) <= Integer.parseInt(asyncTaskNbPiecesMax)){
-                            propertiesResult.add(newProperty);
+                        if(asyncTaskNbPiecesMax.equals("15")){
+                            if(Integer.parseInt(newProperty.getNbPieces()) >= Integer.parseInt(asyncTaskNbPiecesMin)){
+                                propertiesResult.add(newProperty);
+                            }
+                        }
+                        else{
+                            if(Integer.parseInt(newProperty.getNbPieces()) >= Integer.parseInt(asyncTaskNbPiecesMin) && Integer.parseInt(newProperty.getNbPieces()) <= Integer.parseInt(asyncTaskNbPiecesMax)){
+                                propertiesResult.add(newProperty);
+                            }
                         }
                     }
                 }

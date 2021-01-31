@@ -15,6 +15,10 @@
     <string name="pref">Préférences</string>
     <string name="piecesMinStr">Minimum : </string>
     <string name="piecesMaxStr">Maximum : </string>
+    <string-array name="rangeSliderValues">
+        <item>1</item>
+        <item>15</item>
+    </string-array>
 
     --Preferences
     <string name="valid">Valider</string>

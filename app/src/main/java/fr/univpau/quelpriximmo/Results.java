@@ -65,6 +65,9 @@ public class Results extends AppCompatActivity {
             desc.setText("Repartition des ventes par tranches de prix");
             chart.setDescription(desc);
             chart.invalidate();
+            if(resultats.isEmpty()){
+                Toast.makeText(this, "Aucun résultat", Toast.LENGTH_LONG).show();
+            }
         }
     }
 

@@ -15,8 +15,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.location.LocationCallback;
@@ -24,8 +26,13 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.slider.RangeSlider;
+import com.google.android.material.slider.Slider;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import fr.univpau.quelpriximmo.AsyncTask.JsonGetter;
 
@@ -34,6 +41,10 @@ public class SearchForm extends AppCompatActivity {
 
     private Double latitude, longitude;
     SharedPreferences pref;
+    RangeSlider piecesSlider;
+    TextView nbPiecesTxt;
+    float nbPiecesMin;
+    float nbPiecesMax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +60,17 @@ public class SearchForm extends AppCompatActivity {
             editor.putString("distance", "500");
             editor.apply();
         }
+
+        piecesSlider = findViewById(R.id.piecesSlider);
+
+        nbPiecesTxt = findViewById(R.id.nbPiecesTxt);
+        piecesSlider.addOnChangeListener(onChangeListener);
+        nbPiecesMin = 1;
+        nbPiecesMax = 2;
+        List<Float> valuesCreate = new ArrayList<Float>();
+        valuesCreate.add(nbPiecesMin);
+        valuesCreate.add(nbPiecesMax);
+        piecesSlider.setValues(valuesCreate);
     }
 
     @Override
@@ -76,6 +98,44 @@ public class SearchForm extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    RangeSlider.OnChangeListener onChangeListener = new RangeSlider.OnChangeListener() {
+        @Override
+        public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+            List<Float> values = slider.getValues();
+            nbPiecesMin = Collections.min(values);
+            nbPiecesMax = Collections.max(values);
+            String nbPiecesMinTxt = Integer.toString(Math.round(nbPiecesMin));
+            String nbPiecesMaxTxt = Integer.toString(Math.round(nbPiecesMax));
+            String txtTemp = "";
+            if(nbPiecesMinTxt.equals(nbPiecesMaxTxt)){
+                if(nbPiecesMaxTxt.equals("15")){
+                    txtTemp += nbPiecesMinTxt + " pièces ou plus.";
+                }
+                else if(nbPiecesMaxTxt.equals("1")){
+                    txtTemp += nbPiecesMinTxt + " pièce.";
+                }
+                else{
+                    txtTemp += nbPiecesMinTxt + " pièces.";
+                }
+            }
+            else{
+                txtTemp += "De ";
+                txtTemp += nbPiecesMinTxt;
+                txtTemp += " à ";
+                if(nbPiecesMaxTxt.equals("15")){
+                    txtTemp += nbPiecesMaxTxt + " pièces ou plus.";
+                }
+                else if(nbPiecesMaxTxt.equals("1")){
+                    txtTemp += nbPiecesMaxTxt + " pièce.";
+                }
+                else{
+                    txtTemp += nbPiecesMaxTxt + " pièces.";
+                }
+            }
+            nbPiecesTxt.setText(txtTemp);
+        }
+    };
+
     public void okSearch(View v) throws IOException {
 
         final int rotation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
@@ -92,8 +152,6 @@ public class SearchForm extends AppCompatActivity {
 
         RadioButton radioAppt = findViewById(R.id.radioAppt);
         RadioButton radioHome = findViewById(R.id.radioHome);
-        EditText nbSearchAnsMin = findViewById(R.id.nbSearchMin);
-        EditText nbSearchAnsMax = findViewById(R.id.nbSearchMax);
 
 
 
@@ -115,29 +173,27 @@ public class SearchForm extends AppCompatActivity {
         }
 
 
-        String nbPiecesMin = "";
-        nbPiecesMin += nbSearchAnsMin.getText().toString();
-        String nbPiecesMax = "";
-        nbPiecesMax += nbSearchAnsMax.getText().toString();
+        String nbPiecesMinStr = Integer.toString(Math.round(nbPiecesMin));
+        String nbPiecesMaxStr = Integer.toString(Math.round(nbPiecesMax));
 
         if(typeBien.equals("")){
             Toast.makeText(this, "Merci de choisir le type de bien", Toast.LENGTH_SHORT).show();
         }
-        else if(nbPiecesMin.equals("")){
+        else if(nbPiecesMinStr.equals("")){
             Toast.makeText(this, "Merci de choisir le nombre de pièces minimum", Toast.LENGTH_SHORT).show();
         }
-        else if(nbPiecesMax.equals("")){
+        else if(nbPiecesMaxStr.equals("")){
             Toast.makeText(this, "Merci de choisir le nombre de pièces maximum", Toast.LENGTH_SHORT).show();
         }
-        else if(Integer.parseInt(nbPiecesMin)>Integer.parseInt(nbPiecesMax)){
+        else if(Integer.parseInt(nbPiecesMinStr)>Integer.parseInt(nbPiecesMaxStr)){
             Toast.makeText(this, "Le nombre de pièces minimum doit être inférieur au nombre de pièces maximum", Toast.LENGTH_SHORT).show();
         }
         else{
-            JsonGetter jsonGetter = new JsonGetter(this, typeBien, nbPiecesMin, nbPiecesMax);
+            JsonGetter jsonGetter = new JsonGetter(this, typeBien, nbPiecesMinStr, nbPiecesMaxStr);
             jsonGetter.execute(search);
         }
 
-        System.out.println("Bien recherché : " + typeBien + " avec " + nbPiecesMin + " pièces à " + nbPiecesMax);
+        System.out.println("Bien recherché : " + typeBien + " avec " + nbPiecesMinStr + " pièces à " + nbPiecesMaxStr);
     }
 
     @SuppressLint("MissingPermission")
