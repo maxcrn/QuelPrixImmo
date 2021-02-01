@@ -65,7 +65,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:gravity="center|center_horizontal"
         android:orientation="horizontal">
 
       <com.google.android.material.slider.RangeSlider
@@ -74,21 +74,21 @@
           android:layout_height="wrap_content"
           android:stepSize="1"
           android:valueTo="15"
-          app:values="@array/rangeSliderValues"
           app:haloColor="@color/purpleQPI"
           app:thumbColor="@color/purple2QPI"
           app:tickColorActive="@color/purpleQPI"
           app:tickColorInactive="@color/purple2QPI"
           app:trackColorActive="@color/yellowQPI"
-          app:trackColorInactive="@color/yellowQPI" />
-    </LinearLayout>
+          app:trackColorInactive="@color/yellowQPI"
+          app:values="@array/rangeSliderValues" />
 
-    <TextView
-        android:id="@+id/nbPiecesTxt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textAppearance="@style/radioText" />
+      <TextView
+          android:id="@+id/nbPiecesTxt"
+          android:layout_width="190dp"
+          android:layout_height="wrap_content"
+          android:textAlignment="center"
+          android:textAppearance="@style/radioText" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
