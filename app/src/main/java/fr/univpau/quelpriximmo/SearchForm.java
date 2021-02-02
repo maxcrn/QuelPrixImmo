@@ -77,6 +77,7 @@ public class SearchForm extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        getLocation();
     }
 
     @Override
