@@ -19,36 +19,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/typeSearch"
+        android:textAlignment="center"
         android:textAppearance="@style/title2Search" />
 
-    <RadioGroup
-        android:id="@+id/grpRadio"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
-      <RadioButton
-          android:id="@+id/radioAppt"
-          android:layout_width="match_parent"
+      <RadioGroup
+          android:id="@+id/grpRadio"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="@string/appt"
-          android:textAppearance="@style/radioText"
-          app:buttonTint="@color/yellowQPI" />
+          android:orientation="vertical">
 
-      <RadioButton
-          android:id="@+id/radioHome"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/home"
-          android:textAppearance="@style/radioText"
-          app:buttonTint="@color/yellowQPI" />
-    </RadioGroup>
+        <RadioButton
+            android:id="@+id/radioAppt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/appt"
+            android:textAppearance="@style/radioText"
+            app:buttonTint="@color/yellowQPI" />
+
+        <RadioButton
+            android:id="@+id/radioHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home"
+            android:textAppearance="@style/radioText"
+            app:buttonTint="@color/yellowQPI" />
+      </RadioGroup>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/nbSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/nbSearch"
+        android:textAlignment="center"
         android:textAppearance="@style/title2Search" />
 
     <com.google.android.material.slider.RangeSlider
@@ -70,6 +79,7 @@
         android:id="@+id/nbPiecesTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:textAppearance="@style/radioText" />
 
     <LinearLayout

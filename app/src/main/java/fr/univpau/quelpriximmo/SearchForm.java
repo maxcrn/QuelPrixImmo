@@ -91,7 +91,7 @@ public class SearchForm extends AppCompatActivity {
         if(item.getItemId() == R.id.preference){
             Intent i = new Intent();
             i.setClass(this, Pref.class);
-            startActivity(i);
+            startActivityForResult(i, 1);
         }
 
 

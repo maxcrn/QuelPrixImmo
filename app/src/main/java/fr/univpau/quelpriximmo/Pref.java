@@ -45,9 +45,8 @@ public class Pref extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("distance", Integer.toString((int)sliderDist.getValue()));
         editor.apply();
-        Intent i = new Intent();
-        i.setClass(this, SearchForm.class);
-        startActivity(i);
+        setResult(Activity.RESULT_OK);
+        finish();
     }
 
 
