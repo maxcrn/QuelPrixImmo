@@ -138,17 +138,7 @@ public class SearchForm extends AppCompatActivity {
 
     public void okSearch(View v) throws IOException {
 
-        final int rotation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 
-        if(rotation == Surface.ROTATION_0) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-        else if(rotation == Surface.ROTATION_90) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }
-        else if(rotation == Surface.ROTATION_270){
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE );
-        }
 
         RadioButton radioAppt = findViewById(R.id.radioAppt);
         RadioButton radioHome = findViewById(R.id.radioHome);
@@ -176,22 +166,29 @@ public class SearchForm extends AppCompatActivity {
         String nbPiecesMinStr = Integer.toString(Math.round(nbPiecesMin));
         String nbPiecesMaxStr = Integer.toString(Math.round(nbPiecesMax));
 
-        if(typeBien.equals("")){
+        if(typeBien.equals("")) {
             Toast.makeText(this, "Merci de choisir le type de bien", Toast.LENGTH_SHORT).show();
         }
-        else if(nbPiecesMinStr.equals("")){
-            Toast.makeText(this, "Merci de choisir le nombre de pièces minimum", Toast.LENGTH_SHORT).show();
-        }
-        else if(nbPiecesMaxStr.equals("")){
-            Toast.makeText(this, "Merci de choisir le nombre de pièces maximum", Toast.LENGTH_SHORT).show();
-        }
-        else if(Integer.parseInt(nbPiecesMinStr)>Integer.parseInt(nbPiecesMaxStr)){
-            Toast.makeText(this, "Le nombre de pièces minimum doit être inférieur au nombre de pièces maximum", Toast.LENGTH_SHORT).show();
+        else if(latitude == null || longitude == null){
+            Toast.makeText(this, "Merci d'autoriser cette application à utiliser la localisation dans les paramètres de votre téléphone", Toast.LENGTH_LONG).show();
         }
         else{
+            final int rotation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+            if(rotation == Surface.ROTATION_0) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+            else if(rotation == Surface.ROTATION_90) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            }
+            else if(rotation == Surface.ROTATION_270){
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE );
+            }
+
             JsonGetter jsonGetter = new JsonGetter(this, typeBien, nbPiecesMinStr, nbPiecesMaxStr);
             jsonGetter.execute(search);
         }
+
+
 
         System.out.println("Bien recherché : " + typeBien + " avec " + nbPiecesMinStr + " pièces à " + nbPiecesMaxStr);
     }

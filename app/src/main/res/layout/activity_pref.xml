@@ -15,10 +15,10 @@
 
         <TextView
             android:id="@+id/textView2"
-            style="@style/titleSearch"
+            style="@style/title2Search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/pref"
+            android:text="@string/enterDist"
             android:textAlignment="center" />
 
         <com.google.android.material.slider.Slider

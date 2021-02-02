@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchForm"/>
+        <activity android:name=".SearchForm" android:label="Recherche"/>
     </application>
 
 </manifest>

@@ -22,5 +22,6 @@
 
     --Preferences
     <string name="valid">Valider</string>
+    <string name="enterDist">Portée de la recherche</string>
 
 </resources>

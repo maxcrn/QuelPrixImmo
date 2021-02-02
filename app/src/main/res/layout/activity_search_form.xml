@@ -15,14 +15,6 @@
       tools:layout_editor_absoluteY="169dp">
 
     <TextView
-        android:id="@+id/titleSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/titleSearch"
-        android:textAlignment="center"
-        android:textAppearance="@style/titleSearch" />
-
-    <TextView
         android:id="@+id/typeSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
